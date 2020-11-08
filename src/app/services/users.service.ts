@@ -1,7 +1,6 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserDataModel } from '../models/data-layer/user-data.model';
-import { JobUserModel } from '../models/presentation-layer/job.model';
 import { UserModel } from '../models/presentation-layer/user.model';
 import { map } from 'rxjs/operators';
 
@@ -11,9 +10,7 @@ import { map } from 'rxjs/operators';
 export class UsersService {
   private readonly usersSource$ = new BehaviorSubject<UserDataModel[]>([]);
 
-  // private readonly jobsService = this.injector.get(JobsService);
-
-  constructor(private injector: Injector) {
+  constructor() {
     this.usersSource$.next(
       [
         {
@@ -38,14 +35,12 @@ export class UsersService {
         map(users => users.map(user => ({
             id: user.id,
             name: user.name,
-            // fixme: count
-            assignedJobsCount: 0,
           })),
         ),
       );
   }
 
-  readForJob(userId: string): JobUserModel {
+  readForJob(userId: string): UserModel {
     const foundUser = this.usersSource$.value.find(user => user.id === userId);
     if (!foundUser) {
       throw Error(`invalid user: ${userId}`);
