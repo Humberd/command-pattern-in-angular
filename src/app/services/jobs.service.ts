@@ -75,8 +75,8 @@ export class JobsService {
       .pipe(
         tap(job => {
           job.assignedUserId = userId;
-          this.jobsSource$.next([...this.jobsSource$.value]);
-        }),
+          this.reloadData();
+``        }),
         mapTo(undefined),
       );
   }
@@ -86,10 +86,14 @@ export class JobsService {
       .pipe(
         tap(job => {
           job.status = status;
-          this.jobsSource$.next([...this.jobsSource$.value]);
+          this.reloadData();
         }),
         mapTo(undefined),
       );
+  }
+
+  reloadData(): void {
+    this.jobsSource$.next([...this.jobsSource$.value]);
   }
 
   private findJob(jobId: string): Observable<JobDataModel> {

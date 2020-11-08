@@ -19,7 +19,9 @@ export abstract class ActionDefinition<Params> {
             .pipe(
               take(1),
             )
-            .subscribe();
+            .subscribe(() => config.onSuccess?.());
+        } else {
+          config.onSuccess?.();
         }
       },
     };

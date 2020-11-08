@@ -19,7 +19,7 @@ export class JobUnassignAction extends ActionDefinition<JobUnassignActionParams>
 
   protected getMenu(): ActionDefinitionContextMenu {
     return {
-      name: 'Unassign User',
+      name: 'Unassign from User',
       icon: 'voice_over_off',
     };
   }

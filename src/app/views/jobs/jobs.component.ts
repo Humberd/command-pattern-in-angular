@@ -30,7 +30,8 @@ export class JobsComponent {
     return [
       this.injector.get(JobAssignAction).build({
         resolveParams: actor => ({jobId: actor.id}),
-        isHidden: actor => !!actor.assignedUser
+        isHidden: actor => !!actor.assignedUser,
+        onSuccess: () => this.jobsService.reloadData()
       }),
       this.injector.get(JobUnassignAction).build({
         resolveParams: actor => ({jobId: actor.id}),
