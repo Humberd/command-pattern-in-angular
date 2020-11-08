@@ -16,9 +16,7 @@ export abstract class ActionDefinition<Params> {
         const result = this.invoke(config.resolveParams(actor));
         if (isObservable(result)) {
           result
-            .pipe(
-              take(1),
-            )
+            .pipe(take(1))
             .subscribe(() => config.onSuccess?.());
         } else {
           config.onSuccess?.();
