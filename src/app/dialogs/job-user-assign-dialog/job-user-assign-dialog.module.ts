@@ -17,5 +17,6 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatSelectModule,
   ],
+  entryComponents: [JobUserAssignDialogComponent]
 })
 export class JobUserAssignDialogModule { }
