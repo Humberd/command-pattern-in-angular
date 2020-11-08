@@ -6,9 +6,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { ContextMenuModule } from '../context-menu/context-menu.module';
+import { RouterModule } from '@angular/router';
+import { JobStatusComponent } from './job-status/job-status.component';
 
 @NgModule({
-  declarations: [JobsTableComponent],
+  declarations: [JobsTableComponent, JobStatusComponent],
   imports: [
     CommonModule,
     MatTableModule,
@@ -16,6 +18,7 @@ import { ContextMenuModule } from '../context-menu/context-menu.module';
     MatIconModule,
     MatMenuModule,
     ContextMenuModule,
+    RouterModule,
   ],
   exports: [JobsTableComponent]
 })
