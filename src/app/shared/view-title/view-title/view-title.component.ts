@@ -9,4 +9,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 export class ViewTitleComponent {
   @Input() viewTitle: string;
   @Input() subtitle: string;
+  @Input() hasBackButton: boolean;
 }

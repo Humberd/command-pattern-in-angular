@@ -40,7 +40,7 @@ export class UsersService {
       );
   }
 
-  readForJob(userId: string): UserModel {
+  read(userId: string): UserModel {
     const foundUser = this.usersSource$.value.find(user => user.id === userId);
     if (!foundUser) {
       throw Error(`invalid user: ${userId}`);
