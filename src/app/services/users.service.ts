@@ -1,7 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { UserDataModel } from '../models/data-layer/user-data.model';
-import { JobsService } from './jobs.service';
 import { JobUserModel } from '../models/presentation-layer/job.model';
 
 @Injectable({
@@ -9,7 +8,7 @@ import { JobUserModel } from '../models/presentation-layer/job.model';
 })
 export class UsersService {
   private readonly usersSource$ = new BehaviorSubject<UserDataModel[]>([]);
-  private readonly jobsService = this.injector.get(JobsService);
+  // private readonly jobsService = this.injector.get(JobsService);
 
   constructor(private injector: Injector) {
     this.usersSource$.next(

@@ -65,7 +65,7 @@ export class JobsService {
           id: job.id,
           name: job.name,
           status: job.status,
-          assignedUser: this.usersService.readForJob(job.assignedUserId),
+          assignedUser: job.assignedUserId ? this.usersService.readForJob(job.assignedUserId) : undefined,
         }))),
       );
   }

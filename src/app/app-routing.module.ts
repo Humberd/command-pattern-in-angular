@@ -1,15 +1,20 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'jobs',
+  },
   {
     path: 'jobs', loadChildren: () => import('./views/jobs/jobs.module').then(m => m.JobsModule),
   },
   {
-    path: 'users', loadChildren: () => import('./views/users/users.module').then(m => m.UsersModule)
+    path: 'users', loadChildren: () => import('./views/users/users.module').then(m => m.UsersModule),
   },
   {
-    path: 'users/:id', loadChildren: () => import('./views/user/user.module').then(m => m.UserModule)
+    path: 'users/:id', loadChildren: () => import('./views/user/user.module').then(m => m.UserModule),
   },
 ];
 
