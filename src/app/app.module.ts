@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { JobUserAssignDialogModule } from './dialogs/job-user-assign-dialog/job-user-assign-dialog.module';
+import { ConfirmationDialogModule } from './dialogs/confirmation-dialog/confirmation-dialog.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { JobUserAssignDialogModule } from './dialogs/job-user-assign-dialog/job-
     AppRoutingModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    JobUserAssignDialogModule
+    JobUserAssignDialogModule,
+    ConfirmationDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
