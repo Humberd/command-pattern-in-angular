@@ -1,2 +1,2 @@
 <app-view-title viewTitle="Jobs" subtitle="List of all jobs in the system"></app-view-title>
-<app-jobs-table class="jobs-table" [jobs]="jobsService.readList$() | async"></app-jobs-table>
+<app-jobs-table class="jobs-table" [jobs]="jobs$ | async" [actions]="actions"></app-jobs-table>

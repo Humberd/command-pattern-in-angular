@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { JobDataModel } from '../models/data-layer/job-data.model';
 import { JobModel } from '../models/presentation-layer/job.model';
 import { JobStatusEnum } from '../models/data-layer/job-status.enum';
-import { map } from 'rxjs/operators';
+import { map, mapTo, tap } from 'rxjs/operators';
 import { UsersService } from './users.service';
 
 @Injectable({
@@ -68,6 +68,36 @@ export class JobsService {
           assignedUser: job.assignedUserId ? this.usersService.readForJob(job.assignedUserId) : undefined,
         }))),
       );
+  }
+
+  setUser(jobId: string, userId?: string): Observable<void> {
+    return this.findJob(jobId)
+      .pipe(
+        tap(job => {
+          job.assignedUserId = userId;
+          this.jobsSource$.next([...this.jobsSource$.value]);
+        }),
+        mapTo(undefined),
+      );
+  }
+
+  setStatus(jobId: string, status: JobStatusEnum): Observable<void> {
+    return this.findJob(jobId)
+      .pipe(
+        tap(job => {
+          job.status = status;
+          this.jobsSource$.next([...this.jobsSource$.value]);
+        }),
+        mapTo(undefined),
+      );
+  }
+
+  private findJob(jobId: string): Observable<JobDataModel> {
+    const foundJob = this.jobsSource$.value.find(job => job.id === jobId);
+    if (!foundJob) {
+      return throwError('Job not found');
+    }
+    return of(foundJob);
   }
 
 }

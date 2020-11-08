@@ -4,6 +4,8 @@ import { JobsTableComponent } from './jobs-table/jobs-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { ContextMenuModule } from '../context-menu/context-menu.module';
 
 @NgModule({
   declarations: [JobsTableComponent],
@@ -11,7 +13,9 @@ import { MatIconModule } from '@angular/material/icon';
     CommonModule,
     MatTableModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule,
+    ContextMenuModule,
   ],
   exports: [JobsTableComponent]
 })
