@@ -10,7 +10,7 @@ import { JobModel } from '../../../models/presentation-layer/job.model';
 export class JobsTableComponent {
   @Input() jobs: JobModel[];
 
-  displayedColumns = ['name', 'status', 'assignedUser'];
+  displayedColumns = ['name', 'status', 'assignedUser', 'actions'];
 
 
 }
