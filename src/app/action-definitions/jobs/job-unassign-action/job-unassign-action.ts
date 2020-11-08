@@ -5,7 +5,8 @@ import { ActionDefinitionContextMenu } from '../../action-definition-context-men
 import { JobsService } from '../../../services/jobs.service';
 import { Observable } from 'rxjs';
 import { ConfirmationDialogService } from '../../../dialogs/confirmation-dialog/services/confirmation-dialog.service';
-import { filter, switchMap } from 'rxjs/operators';
+import { filter, switchMap, tap } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ export class JobUnassignAction extends ActionDefinition<JobUnassignActionParams>
   constructor(
     private jobsService: JobsService,
     private confirmationDialogService: ConfirmationDialogService,
+    private snackBar: MatSnackBar,
   ) {
     super();
   }
@@ -34,6 +36,7 @@ export class JobUnassignAction extends ActionDefinition<JobUnassignActionParams>
         })),
         filter(Boolean),
         switchMap(() => this.jobsService.setUser(params.jobId, undefined)),
+        tap(() => this.snackBar.open('User unassigned successfully'))
       );
   }
 

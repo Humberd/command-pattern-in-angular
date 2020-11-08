@@ -6,12 +6,18 @@ import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { JobUserAssignDialogComponent } from '../../../dialogs/job-user-assign-dialog/job-user-assign-dialog.component';
 import { JobUserAssignDialogDataModel } from '../../../dialogs/job-user-assign-dialog/models/job-user-assign-dialog-data.model';
+import { tap } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserModel } from '../../../models/presentation-layer/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class JobAssignAction extends ActionDefinition<JobAssignActionParams> {
-  constructor(private dialogService: MatDialog) {
+  constructor(
+    private dialogService: MatDialog,
+    private snackBar: MatSnackBar,
+  ) {
     super();
   }
 
@@ -20,10 +26,18 @@ export class JobAssignAction extends ActionDefinition<JobAssignActionParams> {
       jobId: params.jobId,
     };
 
-    return this.dialogService.open(JobUserAssignDialogComponent, {
-      data: dialogData,
-    })
-      .afterClosed();
+    return this.dialogService
+      .open(JobUserAssignDialogComponent, {
+        data: dialogData,
+      })
+      .afterClosed()
+      .pipe(
+        tap((result: UserModel) => {
+          if (result) {
+            this.snackBar.open(`${result.name} was successfully assigned to the Job`);
+          }
+        }),
+      );
   }
 
   protected getMenu(): ActionDefinitionContextMenu {

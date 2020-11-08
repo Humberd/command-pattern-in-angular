@@ -44,7 +44,7 @@ export class JobUserAssignDialogComponent implements OnInit {
   submit(): void {
     this.jobsService.setUser(this.dialogData.jobId, this.formGroup.value.userId)
       .subscribe(() => {
-        this.dialogRef.close('ok');
+        this.dialogRef.close(this.availableUsers.find(user => user.id === this.formGroup.value.userId));
       });
   }
 
